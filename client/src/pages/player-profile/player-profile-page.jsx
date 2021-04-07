@@ -1,11 +1,10 @@
-import { useGolfCourses } from '../../data/hooks/use-golf-courses';
+import { PlayerRounds, HandicapCard } from './components';
 
-const PlayerProfilePage = () => {
-
-    useGolfCourses();
-    return (
-        <div>hi</div>
-    );
-}
+const PlayerProfilePage = () => (
+    <div>
+        <HandicapCard />
+        <PlayerRounds />
+    </div>   
+)
 
 export { PlayerProfilePage };

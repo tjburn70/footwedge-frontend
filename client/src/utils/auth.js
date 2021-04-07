@@ -1,14 +1,14 @@
 import { footwedgeApi } from '../data/api-config';
 
 import { localStorageService } from '../modules/local-storage-service';
+import { history } from '../routes/history';
 
 
 export const refreshAccessToken = async () => {
-    const refreshToken = localStorageService.getRefreshToken();
     const config = {
         method: 'post',
         url: '/auth/refresh',
-        headers: {'Authorization': `Bearer ${refreshToken}`},
+        requiresRefreshToken: true,
     }
     const resp = await footwedgeApi(config);
     localStorageService.setAccessToken(resp.data.access_token);
@@ -23,20 +23,22 @@ export const login = async ({email, password}) => {
     }
     const resp = await footwedgeApi(config);
     localStorageService.setTokens(resp.data);
+    history.push('/player-profile');
 }
 
 export const logout = async () => {
     const config = {
         method: 'delete',
         url: '/user/logout',
+        requiresRefreshToken: true,
     }
     await footwedgeApi(config);
     localStorageService.clearTokens();
+    history.push('/');
 }
 
 export const isLoggedIn = () => {
     const accessToken = localStorageService.getAccessToken();
-    console.log("accessToken", accessToken);
     if (accessToken !== null) {
         return true;
     } else {

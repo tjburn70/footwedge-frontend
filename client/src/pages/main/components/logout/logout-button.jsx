@@ -1,23 +1,22 @@
-import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
-const LOGIN_PATH='/login';
+
+import { logout } from '../../../../utils/auth';
 
 const useStyles = makeStyles(() => ({
-  loginButton: {
+  logoutButton: {
     color: 'inherit'
   },
 }));
 
-const LoginButton = () => {
+const LogoutButton = () => {
   const classes = useStyles();
   return (
-    <Button className={classes.loginButton} component={Link} to={LOGIN_PATH}>
-        Login
+    <Button className={classes.logoutButton} onClick={logout}>
+        Logout
     </Button>
-    
   );
 }
 
-export { LoginButton }
+export { LogoutButton } 
