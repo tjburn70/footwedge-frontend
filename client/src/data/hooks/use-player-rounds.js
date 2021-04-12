@@ -21,10 +21,14 @@ const getGolfCoursesByIds = async (golfCourseIds) => {
 
 const getPlayerRoundDetails = async () => {
     const playerRounds = await getPlayerRounds();
+    const roundIds = playerRounds.map(round => round.id);
+    const roundsById = playerRounds.reduce((map, obj) => (map[obj.id] = obj, map), {});
     const golfCourseIds = playerRounds.map(round => round.golf_course_id);
     const normalizedGolfCourses = await getGolfCoursesByIds(golfCourseIds);
     return { 
         rounds: playerRounds,
+        roundIds: roundIds,
+        roundsById: roundsById,
         golfCourseById: normalizedGolfCourses.entities.golf_courses,
         teeBoxById: normalizedGolfCourses.entities.tee_boxes,
     }
