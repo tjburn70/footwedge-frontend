@@ -9,8 +9,8 @@ import TableCell from '@material-ui/core/TableCell';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 
-import { usePlayerRounds } from '../../../data/hooks/use-player-rounds';
-import { PlayerRound } from './player-round';
+import { usePlayerRounds } from '../../../../data/hooks/use-player-rounds';
+import { PlayerRound } from '../player-round';
 
 const PlayerRounds = () => {
     const { data, isLoading } = usePlayerRounds();
