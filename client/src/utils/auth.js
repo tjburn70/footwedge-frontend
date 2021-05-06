@@ -1,45 +1,61 @@
-import { footwedgeApi } from '../data/api-config';
+import { Auth } from 'aws-amplify';
 
 import { localStorageService } from '../modules/local-storage-service';
 import { history } from '../routes/history';
 
-
-export const refreshAccessToken = async () => {
-    const config = {
-        method: 'post',
-        url: '/auth/refresh',
-        requiresRefreshToken: true,
+export const registerUser = async ({ username, password, userAttributes }) => {
+    const { birthdate, phone_number, gender, firstName, lastName, email } = userAttributes;
+    const name = `${firstName} ${lastName}`;
+    try {
+        await Auth.signUp({
+            username,
+            password,
+            attributes: {
+                email,
+                birthdate,
+                phone_number,
+                gender,
+                name,
+                'custom:firstName': firstName,
+                'custom:lastName': lastName,
+            }
+        });
+        history.push('/confirm-user');
+    } catch (error) {
+        console.log('error signing up:', error);
     }
-    const resp = await footwedgeApi(config);
-    localStorageService.setAccessToken(resp.data.access_token);
 }
 
-export const login = async ({email, password}) => {
-    const config = {
-        method: 'post',
-        url: '/user/login',
-        headers: {'Content-Type': 'application/json'},
-        data: {email: email, password: password},
+export const login = async ({ email, password }) => {
+    try {
+        await Auth.signIn(email, password);
+        history.push('/player-profile');
+    } catch (error) {
+        console.log('error signing in', error);
     }
-    const resp = await footwedgeApi(config);
-    localStorageService.setTokens(resp.data);
-    history.push('/player-profile');
 }
 
 export const logout = async () => {
-    const config = {
-        method: 'delete',
-        url: '/user/logout',
-        requiresRefreshToken: true,
+    try {
+        await Auth.signOut();
+        history.push('/');
+    } catch (error) {
+        console.log('error signing out', error);
     }
-    await footwedgeApi(config);
-    localStorageService.clearTokens();
-    history.push('/');
+}
+
+export const confirmUser = async ({ username, code }) => {
+    try {
+        await Auth.confirmSignUp(username, code);
+        history.push('/player-profile');
+    } catch (error) {
+        console.log('error confirming sign up', error);
+    }
 }
 
 export const isLoggedIn = () => {
-    const accessToken = localStorageService.getAccessToken();
-    if (accessToken !== null) {
+    const lastAuthUser = localStorageService.getLastAuthUser();
+    if (lastAuthUser) {
         return true;
     } else {
         return false;

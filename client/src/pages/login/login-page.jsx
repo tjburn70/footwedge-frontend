@@ -10,7 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import { login, isLoggedIn } from '../../utils/auth';
+import { login } from '../../utils/auth';
+import { useAuthState } from '../../hooks/use-auth-state';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -36,6 +37,7 @@ const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const classes = useStyles();
+    const { isLoggedIn, errorMessage } = useAuthState();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -45,7 +47,7 @@ const LoginPage = () => {
         });
     }
 
-    if (isLoggedIn() === true) {
+    if (isLoggedIn) {
         return <Redirect to='/player-profile'/>
     }
 
@@ -59,6 +61,7 @@ const LoginPage = () => {
                 <Typography component="h1" variant="h5">
                     Login
                 </Typography>
+                {errorMessage ?? null}
 
                 <form
                     className={classes.form}

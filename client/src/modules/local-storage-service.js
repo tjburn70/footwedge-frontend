@@ -1,5 +1,8 @@
+import { appConfig } from './config';
+
 const ACCESS_TOKEN_KEY = 'access_token';
 const REFRESH_TOKEN_KEY = 'refresh_token';
+const LAST_AUTH_USER_KEY = `CognitoIdentityServiceProvider.${appConfig.auth.userPoolWebClientId}.LastAuthUser`;
 
 const LocalStorageService = () => {
 
@@ -25,12 +28,17 @@ const LocalStorageService = () => {
         localStorage.removeItem(REFRESH_TOKEN_KEY);
     }
 
+    const _getLastAuthUser = () => {
+        return localStorage.getItem(LAST_AUTH_USER_KEY);
+    }
+
     return {
         setTokens: _setTokens,
         setAccessToken: _setAccessToken,
         getAccessToken: _getAccessToken,
         getRefreshToken: _getRefreshToken,
         clearTokens: _clearTokens,
+        getLastAuthUser: _getLastAuthUser,
     }
 
 }

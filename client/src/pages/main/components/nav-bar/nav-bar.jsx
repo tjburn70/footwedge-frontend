@@ -18,7 +18,7 @@ import GolfCourseIcon from '@material-ui/icons/GolfCourse';
 
 import { LoginButton, LogoutButton, SignUpButton } from '../../components';
 import { MenuOptionsData } from './menu-options-data';
-import { isLoggedIn } from '../../../../utils/auth';
+import { useAuthState } from '../../../../hooks/use-auth-state';
 
 const drawerWidth = 240;
 
@@ -59,12 +59,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NavBar = () => {
+  const { isLoggedIn } = useAuthState();
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const showOptions = () => setOpen(!open);
 
   const renderButton = () => {
-      if (isLoggedIn()) {
+      if (isLoggedIn) {
           return (<LogoutButton />);
         } else {
             return (
