@@ -47,7 +47,7 @@ export const logout = async () => {
 export const confirmUser = async ({ username, code }) => {
     try {
         await Auth.confirmSignUp(username, code);
-        history.push('/player-profile');
+        history.push('/login');
     } catch (error) {
         console.log('error confirming sign up', error);
     }
