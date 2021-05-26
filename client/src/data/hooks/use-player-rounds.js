@@ -6,14 +6,15 @@ import { buildGolfCourseIdsUrl } from '../../utils/url-utils';
 
 const getPlayerRounds = async () => {
     const resp = await footwedgeApi.get('/golf-rounds/');
-    return resp.data.result;
+    console.log("get player-rounds", resp.data);
+    return resp.data.data;
 }
 
 const getGolfCoursesByIds = async (golfCourseIds) => {
     const path = buildGolfCourseIdsUrl(golfCourseIds)
     const { data } = await footwedgeApi.get(path);
     const normalizedGolfCourses = normalize(
-        {'golf_courses': data.result},
+        {'golf_courses': data.data},
         {'golf_courses': [golfCourseSchema]}
     )
     return normalizedGolfCourses;
@@ -38,9 +39,15 @@ const usePlayerRounds = () => {
     return useQuery('player-rounds', getPlayerRoundDetails);
 }
 
-const addPlayerRound = async (newRound) => {
-    const resp = await footwedgeApi.post('/golf-rounds', newRound);
-    return resp.data;
+const addPlayerRound = (newRound) => {
+    footwedgeApi.post('/golf-rounds', newRound)
+        .then((response) => {
+            console.log(response);
+            return response.data;
+        }, (error) => {
+            console.log(error);
+            console.log(error.response.data);
+        });
 }
 
 const usePlayerRoundMutation = () => {
@@ -54,11 +61,8 @@ const usePlayerRoundMutation = () => {
 
 const addPlayerStat = async (newStat) => {
     const roundId = newStat.golf_round_id;
-    const path = `/golf-rounds/${roundId}/golf-round-stats`;
-    const body = {
-        round_stats: [newStat],
-    }
-    const resp = await footwedgeApi.post(path, body);
+    const path = `/golf-rounds/${roundId}/stats`;
+    const resp = await footwedgeApi.post(path, newStat);
     return resp.data;
 }
 

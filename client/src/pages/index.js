@@ -5,3 +5,4 @@ export { PlayerProfilePage } from './player-profile';
 export { PlayerRoundPage } from './player-round';
 export { RegistrationPage } from './registration';
 export { ConfirmationPage } from './confirmation';
+export { EnterRoundPage } from './enter-round';
