@@ -9,6 +9,7 @@ import {
     PlayerRoundPage,
     RegistrationPage,
     ConfirmationPage,
+    EnterRoundPage,
 } from '../pages/';
 
 const AppRouter = memo(() => (
@@ -17,6 +18,7 @@ const AppRouter = memo(() => (
         <Route component={LoginPage} exact={true} path="/login" />
         <Route component={RegistrationPage} exact={true} path="/register" />
         <Route component={ConfirmationPage} exact={true} path="/confirm-user" />
+        <PrivateRoute component={EnterRoundPage} exact={true} path="/enter-round" />
         <PrivateRoute component={PlayerRoundPage} exact={true} path="/player-round/:playerRoundId" />
         <PrivateRoute component={PlayerProfilePage} exact={true} path="/player-profile" />
     </Switch>
