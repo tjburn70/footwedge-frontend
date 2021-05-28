@@ -1,4 +1,5 @@
 import { useQuery, useQueryClient, useMutation } from 'react-query';
+import { useHistory } from 'react-router-dom';
 import { footwedgeApi } from '../api-config';
 
 const getPlayerRounds = async () => {
@@ -33,9 +34,11 @@ const addPlayerRound = (newRound) => {
 
 const usePlayerRoundMutation = () => {
     const client = useQueryClient();
+    const history = useHistory();
     return useMutation(addPlayerRound, {
         onSuccess: () => {
             client.invalidateQueries('player-rounds');
+            history.goBack();
         }
     });
 }
