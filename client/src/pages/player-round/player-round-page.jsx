@@ -7,28 +7,27 @@ import { Scorecard } from './components/scorecard';
 const PlayerRoundPage = () => {
     const { data, isLoading } = usePlayerRounds();
     const { playerRoundId } = useParams();
-    const playerRoundIdNumber = Number(playerRoundId);
 
-    const playerRound = useMemo(() => data?.rounds.find((item) => item.id === playerRoundIdNumber), [
+    const playerRound = useMemo(() => data?.rounds.find((item) => item.golf_round_id === playerRoundId), [
         data,
-        playerRoundIdNumber,
+        playerRoundId,
     ]);
 
     if (isLoading) {
         return <CircularProgress />
     }
+
+    if (!playerRound) {
+        return null
+    }
     
-    const golfCourse = data?.golfCourseById[playerRound.golf_course_id];
-    const teeBox = data?.teeBoxById[playerRound.tee_box_id];
-    const statsByHoleId = playerRound.stats.reduce((map, stat) => {
+    const statsByHoleId = playerRound?.stats.reduce((map, stat) => {
         map[stat.hole_id] = stat;
         return map;
     }, {});
 
     return (
         <Scorecard 
-            golfCourse={golfCourse} 
-            teeBox={teeBox} 
             round={playerRound}
             statsByHoleId={statsByHoleId}
         />
