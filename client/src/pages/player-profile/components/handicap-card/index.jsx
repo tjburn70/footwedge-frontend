@@ -22,10 +22,10 @@ const HandicapCard = () => {
 
     return (
         <Styled.Container>
-            <Styled.Header component="h2" variant="h6" color="primary" gutterBottom>
-                Player Handicap:
+            <Styled.Header component="h2" variant="h4" color="primary" gutterBottom>
+                My Handicap:
             </Styled.Header>
-            <Styled.Handicap component="p" variant="h4">
+            <Styled.Handicap component="p" variant="h5">
                 {handicapIndex}
             </Styled.Handicap>
             {calculatedOnDate ? (

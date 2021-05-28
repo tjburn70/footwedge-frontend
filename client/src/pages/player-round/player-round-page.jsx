@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { usePlayerRounds } from '../../data/hooks/use-player-rounds';
 import { Scorecard } from './components/scorecard';
+import { RoundSummary } from './components/round-summary';
+import * as Styled from './styles';
 
 const PlayerRoundPage = () => {
     const { data, isLoading } = usePlayerRounds();
@@ -27,10 +29,13 @@ const PlayerRoundPage = () => {
     }, {});
 
     return (
-        <Scorecard 
-            round={playerRound}
-            statsByHoleId={statsByHoleId}
-        />
+        <Styled.Container>
+            <RoundSummary round={playerRound}/>
+            <Scorecard 
+                round={playerRound}
+                statsByHoleId={statsByHoleId}
+            />
+        </Styled.Container>
     );
 }
 
