@@ -6,7 +6,6 @@ import { buildGolfCourseIdsUrl } from '../../utils/url-utils';
 
 const getPlayerRounds = async () => {
     const resp = await footwedgeApi.get('/golf-rounds/');
-    console.log("get player-rounds", resp.data);
     return resp.data.data;
 }
 
@@ -22,8 +21,8 @@ const getGolfCoursesByIds = async (golfCourseIds) => {
 
 const getPlayerRoundDetails = async () => {
     const playerRounds = await getPlayerRounds();
-    const roundIds = playerRounds.map(round => round.id);
-    const roundsById = playerRounds.reduce((map, obj) => (map[obj.id] = obj, map), {});
+    const roundIds = playerRounds.map(round => round.golf_round_id);
+    const roundsById = playerRounds.reduce((map, obj) => (map[obj.golf_round_id] = obj, map), {});
     const golfCourseIds = playerRounds.map(round => round.golf_course_id);
     const normalizedGolfCourses = await getGolfCoursesByIds(golfCourseIds);
     return { 

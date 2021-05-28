@@ -1,13 +1,13 @@
 import { useQuery } from 'react-query';
 import { footwedgeApi } from '../api-config';
 
-const getHandicap = async () => {
-    const { data } = await footwedgeApi.get('/handicaps/');
+const getActiveHandicap = async () => {
+    const { data } = await footwedgeApi.get('/handicaps/active');
     return data;
 }
 
 const useActiveHandicap = () => {
-    return useQuery('active-handicap', getHandicap);
+    return useQuery('active-handicap', getActiveHandicap);
 }
 
 export { useActiveHandicap }

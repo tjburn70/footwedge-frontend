@@ -16,10 +16,9 @@ const HandicapCard = () => {
         return <CircularProgress />
     }
 
-    const handicapIndex = data?.result.index;
-    const calculatedOnDate = data?.result.record_start_date;
-    const calculatedOnDateFormatted = formatDate(calculatedOnDate, 'yyyy-MM-dd');
-    const calculatedOn = `Calculated On: ${calculatedOnDateFormatted}`;
+    const handicap = data?.data;
+    const handicapIndex = handicap?.index ?? "N/A"
+    const calculatedOnDate = handicap?.created_ts ?? null;
 
     return (
         <Styled.Container>
@@ -27,11 +26,11 @@ const HandicapCard = () => {
                 Player Handicap:
             </Styled.Header>
             <Styled.Handicap component="p" variant="h4">
-                {handicapIndex ? handicapIndex : "N/A"}
+                {handicapIndex}
             </Styled.Handicap>
-            <Styled.CalculatedOn color="textSecondary">
-                {calculatedOn}
-            </Styled.CalculatedOn>
+            {calculatedOnDate ? (
+                <Styled.CalculatedOn>Calculated On: {formatDate(calculatedOnDate, 'yyyy-MM-dd')}</Styled.CalculatedOn>
+            ) : null}
             <Styled.EnterRoundButton
                 variant="contained"
                 color="primary"
