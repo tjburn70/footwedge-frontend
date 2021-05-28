@@ -43,7 +43,6 @@ const usePlayerRoundMutation = () => {
 const addPlayerStat = async (newStat) => {
     const roundId = newStat.golf_round_id;
     const path = `/golf-rounds/${roundId}/stat`;
-    console.log("newStat", newStat);
     const resp = await footwedgeApi.put(path, newStat);
     return resp.data;
 }
