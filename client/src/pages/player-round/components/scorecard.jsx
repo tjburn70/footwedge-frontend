@@ -53,7 +53,7 @@ const Scorecard = ({ round, statsByHoleId }) => {
 
     return (
         <React.Fragment>
-        <Typography component="h2" variant="h4" color="primary" gutterBottom>
+        <Typography component="h2" variant="h5" color="primary" gutterBottom>
             Scorecard
         </Typography>
         <TableContainer component={Paper}>

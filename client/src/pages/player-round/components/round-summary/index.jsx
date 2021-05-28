@@ -24,7 +24,7 @@ const RoundSummary = ({ round }) => {
 
     return (
         <Styled.Container>
-            <Typography component="h2" variant="h4" color="primary" gutterBottom>
+            <Typography component="h2" variant="h5" color="primary" gutterBottom>
                 Round Summary
             </Typography>
             <Styled.Content>

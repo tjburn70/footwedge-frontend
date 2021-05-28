@@ -39,8 +39,8 @@ const GolfRoundChart = () => {
 
     return (
         <React.Fragment>
-            <Typography component="h2" variant="h4" color="primary" gutterBottom>
-                Trending
+            <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                Scores
             </Typography>
             <LineChart
                 width={500}

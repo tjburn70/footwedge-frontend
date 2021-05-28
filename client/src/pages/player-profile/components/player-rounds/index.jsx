@@ -21,8 +21,8 @@ const PlayerRounds = () => {
 
     return (
         <React.Fragment>
-            <Typography component="h2" variant="h4" color="primary" gutterBottom>
-                My Rounds
+            <Typography component="h2" variant="h5" color="primary" gutterBottom>
+                Past Rounds
             </Typography>
             <TableContainer component={Paper}>
                 <Table size="small">
