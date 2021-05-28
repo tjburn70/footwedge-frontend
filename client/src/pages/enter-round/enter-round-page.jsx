@@ -57,13 +57,20 @@ const EnterRoundPage = () => {
     const [playedOn, setPlayedOn] = useState(null);
     const classes = useStyles();
     const mutation = usePlayerRoundMutation();
-    const { data: teeBoxes } = useTeeBoxes(golfCourse.golf_course_id);
+    const { data: teeBoxes } = useTeeBoxes(golfCourse?.golf_course_id);
 
     const submitRound = (event) => {
         event.preventDefault();
         const data = {
+            golf_club_id: golfCourse.golf_club_id,
+            golf_club_name: golfCourse.golf_club_name,
             golf_course_id: golfCourse.golf_course_id,
+            golf_course_name: golfCourse.golf_course_name,
             tee_box_id: teeBox.tee_box_id,
+            tee_box_distance: teeBox.distance,
+            tee_box_color: teeBox.tee_box_color,
+            tee_box_course_rating: teeBox.course_rating,
+            tee_box_par: teeBox.par,
             gross_score: totalScore,
             towards_handicap: towardsHandicap,
             played_on: formatDate(playedOn, 'yyyy-MM-dd'),
@@ -75,6 +82,7 @@ const EnterRoundPage = () => {
     const processSearchResults = (results) => {
         const golfCourses = [];
         results.forEach(result => {
+            const golfClubId = result._source.golf_club_id;
             const golfClubName = result._source.name;
             result._source.golf_courses.forEach(course => {
                 const golfClub = Object.assign({}, result);
@@ -82,6 +90,7 @@ const EnterRoundPage = () => {
                 golfClub['golf_course_name'] = course.name;
                 golfClub['num_holes'] = course.num_holes;
                 golfClub['golf_club_name'] = golfClubName;
+                golfClub['golf_club_id'] = golfClubId;
                 golfCourses.push(golfClub);
             });
         });

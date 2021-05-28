@@ -9,8 +9,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import { useHoles } from '../../../data/hooks/use-golf-holes';
 import { RoundStat } from './round-stat';
+import { useTeeBox } from '../../../data/hooks/use-tee-boxes';
 
 const useStyles = makeStyles({
     table: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 const getScore = (holes, statsByHoleId) => {
     let totalScore = 0;
     holes.forEach((hole) => {
-        const holeStat = statsByHoleId[hole.id];
+        const holeStat = statsByHoleId[hole.hole_id];
         if (typeof holeStat !== 'undefined') {
             totalScore += holeStat.gross_score;
         }
@@ -30,30 +30,24 @@ const getScore = (holes, statsByHoleId) => {
     return totalScore;
 }
 
-const Scorecard = ({ round, statsByHoleId, teeBox, golfCourse }) => {
+const Scorecard = ({ round, statsByHoleId }) => {
     const classes = useStyles();
-    const golfCourseId = golfCourse.id;
-    const teeBoxId = teeBox.id;
-    const { data, isLoading } = useHoles(golfCourseId, teeBoxId);
-    
+  
+    const golfCourseId = round.golf_course_id;
+    const teeBoxId = round.tee_box_id;
+    const { data: teeBox, isLoading } = useTeeBox(golfCourseId, teeBoxId);
+
     if (isLoading) {
         return <CircularProgress />
     }
-    const teeBoxInfo = `${teeBox.tee_color} (${teeBox.course_rating} | ${teeBox.slope})`;
-    const frontNine = data?.frontNine;
-    const backNine = data?.backNine;
-    let frontNinePar = 0;
-    let frontNineYardage = 0;
-    let backNinePar = 0;
-    let backNineYardage = 0;
-    frontNine.forEach((hole) => {
-        frontNinePar += hole.par;
-        frontNineYardage += hole.distance;
-    });
-    backNine.forEach((hole) => {
-        backNinePar += hole.par;
-        backNineYardage += hole.distance;
-    });
+
+    const frontNine = teeBox.front_nine_holes;
+    const backNine = teeBox.back_nine_holes;
+    const teeBoxInfo = teeBox.tee_box_info;
+    const frontNinePar = teeBox.front_nine_par;
+    const frontNineYardage = teeBox.front_nine_yardage;
+    const backNinePar = teeBox.back_nine_par;
+    const backNineYardage = teeBox.back_nine_yardage;
     const frontNineScore = getScore(frontNine, statsByHoleId);
     const backNineScore = getScore(backNine, statsByHoleId);
     const totalScore = frontNineScore + backNineScore;
@@ -141,9 +135,9 @@ const Scorecard = ({ round, statsByHoleId, teeBox, golfCourse }) => {
                 {frontNine.map((hole) => (
                     <TableCell key={hole.hole_number}>
                         <RoundStat
-                            stat={statsByHoleId[hole.id]}
-                            roundId={round.id}
-                            holeId={hole.id}
+                            stat={statsByHoleId[hole.hole_id]}
+                            roundId={round.golf_round_id}
+                            holeId={hole.hole_id}
                             par={hole.par}
                         />
                     </TableCell>

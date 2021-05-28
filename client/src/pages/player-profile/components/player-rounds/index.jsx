@@ -14,9 +14,6 @@ import { PlayerRound } from '../player-round';
 
 const PlayerRounds = () => {
     const { data, isLoading } = usePlayerRounds();
-    const rounds = data?.rounds;
-    const golfCourseById = data?.golfCourseById;
-    const teeBoxById = data?.teeBoxById;
     
     if (isLoading) {
         return <CircularProgress />
@@ -41,12 +38,10 @@ const PlayerRounds = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rounds.map((round) => (
+                        {data.rounds.map((round) => (
                             <PlayerRound 
-                                key={round.id} 
+                                key={round.golf_round_id} 
                                 round={round}
-                                golfCourse={golfCourseById[round.golf_course_id]}
-                                teeBox={teeBoxById[round.tee_box_id]}
                             />
                         ))}
                     </TableBody>

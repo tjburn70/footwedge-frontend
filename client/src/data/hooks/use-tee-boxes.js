@@ -16,4 +16,18 @@ const useTeeBoxes = (golfCourseId) => {
     );
 }
 
-export { useTeeBoxes };
+const getTeeBoxById = async (golfCourseId, teeBoxId) => {
+    const path = `/golf-courses/${golfCourseId}/tee-boxes/${teeBoxId}`;
+    const { data } = await footwedgeApi.get(path);
+    return data.data;
+}
+
+const useTeeBox = (golfCourseId, teeBoxId) => {
+    return useQuery(
+        ['tee-box', golfCourseId, teeBoxId],
+        async () => getTeeBoxById(golfCourseId, teeBoxId),
+        { enabled: !!golfCourseId && !!teeBoxId}
+    );
+}
+
+export { useTeeBoxes, useTeeBox };

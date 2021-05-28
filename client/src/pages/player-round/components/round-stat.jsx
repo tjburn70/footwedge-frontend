@@ -22,13 +22,13 @@ const relativeScoreToClassName = {
 
 const RoundStat = ({ stat, roundId, holeId, par }) => {
     const [open, setOpen] = useState(false);
-    const [score, setScore] = useState('');
+    const [score, setScore] = useState(null);
     const [fairwayHit, setFairwayHit] = useState(false);
     const [greenInRegulation, setGreenInRegulation] = useState(false);
-    const [totalPutts, setTotalPutts] = useState('');
-    const [totalChips, setTotalChips] = useState('');
+    const [totalPutts, setTotalPutts] = useState(null);
+    const [totalChips, setTotalChips] = useState(null);
     const [greenSideSandShots, setGreenSideSandShots] = useState(null);
-    const [totalPenalties, setTotalPenalties] = useState('');
+    const [totalPenalties, setTotalPenalties] = useState(null);
     const mutation = usePlayerStatMutation();
 
     const handleClickOpen = () => {
@@ -39,7 +39,7 @@ const RoundStat = ({ stat, roundId, holeId, par }) => {
         setOpen(false);
     };
 
-    const submitStat = async () => {
+    const submitStat = () => {
         const data = {
             golf_round_id: roundId,
             hole_id: holeId,
@@ -51,7 +51,7 @@ const RoundStat = ({ stat, roundId, holeId, par }) => {
             greenside_sand_shots: greenSideSandShots,
             penalties: totalPenalties,
         };
-        await mutation.mutateAsync(data);
+        mutation.mutate(data);
         setOpen(false);
     }
 

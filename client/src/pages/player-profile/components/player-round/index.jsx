@@ -4,18 +4,26 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
 
-const PlayerRound = ({ round, golfCourse, teeBox }) => {
+const PlayerRound = ({ round }) => {
     const { push } = useHistory();
-    const {id, played_on, towards_handicap, gross_score } = round;
+    const {
+        golf_round_id,
+        played_on,
+        towards_handicap,
+        gross_score,
+        tee_box_distance,
+        tee_box_course_rating, 
+        golf_course_name 
+    } = round;
 
     const goToPlayerRound = useCallback(() => {
-        push(`/player-round/${id}`);
-    }, [push, id])
+        push(`/player-round/${golf_round_id}`);
+    }, [push, golf_round_id])
 
     return (
-        <TableRow key={id} hover={true} onClick={goToPlayerRound}>
+        <TableRow key={golf_round_id} hover={true} onClick={goToPlayerRound}>
             <TableCell>
-                {id}
+                {golf_round_id}
             </TableCell>
             <TableCell align="center">
                 {played_on}
@@ -24,13 +32,13 @@ const PlayerRound = ({ round, golfCourse, teeBox }) => {
                 {gross_score}
             </TableCell>
             <TableCell align="center">
-                {golfCourse.name}
+                {golf_course_name}
             </TableCell>
             <TableCell align="center">
-                {teeBox.distance}
+                {tee_box_distance}
             </TableCell>
             <TableCell align="center">
-                {teeBox.course_rating}
+                {tee_box_course_rating}
             </TableCell>
             <TableCell align="center">
                 {towards_handicap ? "Y" : "N"}
