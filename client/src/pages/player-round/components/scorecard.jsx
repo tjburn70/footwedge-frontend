@@ -32,7 +32,6 @@ const getScore = (holes, statsByHoleId) => {
 
 const Scorecard = ({ round, statsByHoleId }) => {
     const classes = useStyles();
-  
     const golfCourseId = round.golf_course_id;
     const teeBoxId = round.tee_box_id;
     const { data: teeBox, isLoading } = useTeeBox(golfCourseId, teeBoxId);
@@ -54,7 +53,7 @@ const Scorecard = ({ round, statsByHoleId }) => {
 
     return (
         <React.Fragment>
-        <Typography component="h2" variant="h6" color="primary" gutterBottom>
+        <Typography component="h2" variant="h5" color="primary" gutterBottom>
             Scorecard
         </Typography>
         <TableContainer component={Paper}>
@@ -146,9 +145,9 @@ const Scorecard = ({ round, statsByHoleId }) => {
                 {backNine.map((hole) => (
                     <TableCell key={hole.hole_number}>
                         <RoundStat
-                            stat={statsByHoleId[hole.id]}
-                            roundId={round.id}
-                            holeId={hole.id}
+                            stat={statsByHoleId[hole.hole_id]}
+                            roundId={round.golf_round_id}
+                            holeId={hole.hole_id}
                             par={hole.par}
                         />
                     </TableCell>
