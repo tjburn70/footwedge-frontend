@@ -1,8 +1,14 @@
 import { NavBar } from './components';
+import { AppRouter } from '../../routes/app-router';
+
+import * as Styled from './styles';
 
 const MainPage = () => {
     return (
-        <NavBar />
+        <Styled.Container>
+            <NavBar />
+            <AppRouter />
+        </Styled.Container>
     );
 }
 

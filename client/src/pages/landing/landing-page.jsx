@@ -1,18 +1,13 @@
-const homePageImagePath = process.env.PUBLIC_URL + '/img/golf-courses/sand-valley/sand-valley-no-8.jpg';
-const style = {
-    backgroundImage: `url(${homePageImagePath})`,
-    height: '100vh',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-}
-
+import * as Styled from './styles';
+import logo from './img/footwedge-logo-transparent-2x.svg';
 
 const LandingPage = () => (
-    
-    <div style={style}>
-        <div>Connect.Track.Wage</div>
-    </div>
+    <Styled.Container>
+        <img src={logo} alt="Logo" />
+        <Styled.Info>
+            Record your golf rounds, stats, and track your handicap
+        </Styled.Info>
+    </Styled.Container>
 );
 
 export { LandingPage }

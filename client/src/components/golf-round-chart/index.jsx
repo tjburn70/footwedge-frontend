@@ -1,5 +1,4 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {
   LineChart,
@@ -9,6 +8,8 @@ import {
   CartesianGrid,
   Tooltip,
 } from 'recharts';
+
+import * as Styled from './styles';
 import { StatPreview } from '../stat-preview';
 import { usePlayerRounds } from '../../data/hooks/use-player-rounds';
 import { useStatSummary } from '../../data/hooks/use-stat-summary';
@@ -39,9 +40,9 @@ const GolfRoundChart = () => {
 
     return (
         <React.Fragment>
-            <Typography component="h2" variant="h5" color="primary" gutterBottom>
+            <Styled.Header component="h2" variant="h5" gutterBottom>
                 Scores
-            </Typography>
+            </Styled.Header>
             <LineChart
                 width={500}
                 height={300}

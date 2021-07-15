@@ -4,6 +4,8 @@ import { Auth } from 'aws-amplify';
 import { appConfig } from '../modules/config';
 import { history } from '../routes/history';
 
+import { mockFootwedgeApi } from './mocks/mock-adapter';
+
 const UNAUTHENTICATED_HTTP_CODE = 401;
 
 export const footwedgeApi = axios.create({
@@ -45,4 +47,8 @@ footwedgeApi.interceptors.response.use(
 
         return Promise.reject(error);
     }
-)
+);
+
+if (appConfig.useMocks) {
+    mockFootwedgeApi(footwedgeApi);
+}
