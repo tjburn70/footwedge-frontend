@@ -9,7 +9,7 @@ const Header = styled(Typography)`
 `;
 
 const TableHeader = styled(TableHead)`
-    background-color: #B0C4DE;
+    background-color: #4682B4;
 `;
 
 const TableHeaderCell = styled(TableCell)`
