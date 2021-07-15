@@ -3,7 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import { ACTIVE_HANDICAP_SUCCESS_RESPONSE } from './handicap';
 import { PLAYER_ROUNDS_SUCCESS_RESPONSE } from './player-rounds';
 import { AGGREGATE_STATS_SUCCESS_RESPONSE } from './aggregate-stats';
-import { CANTIGNY_LAKESIDE_WOODSIDE_GOLF_COURSE_ID, MISTWOOD_GOLF_COURSE_ID } from './golf-course';
+import { CANTIGNY_LAKESIDE_WOODSIDE_GOLF_COURSE_ID } from './golf-course';
 import { 
     CANTIGNY_LAKESIDE_WOODSIDE_GOLD_TEE_BOX_ID,
     CANTIGNY_LAKESIDE_WOODSIDE_GOLD_TEE_BOX_SUCCESS_RESPONSE
