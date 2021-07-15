@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -14,10 +13,10 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/picker
 import DateFnsUtils from '@date-io/date-fns';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 
+import * as Styled from './styles';
 import { SearchBar } from '../../components/search-bar';
 import {  usePlayerRoundMutation } from '../../data/hooks/use-player-rounds';
 import { useTeeBoxes } from '../../data/hooks/use-tee-boxes';
@@ -105,9 +104,9 @@ const EnterRoundPage = () => {
     return (
         <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
-                <Typography component="h1" variant="h5">
+                <Styled.Header component="h1" variant="h5">
                     Enter a Past Round
-                </Typography>
+                </Styled.Header>
 
                 <form
                     className={classes.form}
@@ -211,14 +210,14 @@ const EnterRoundPage = () => {
                             />
                         </Grid>
                     </Grid>
-                    <Button
+                    <Styled.EnterRoundButton
                         type="submit"
                         fullWidth
                         variant="contained"
                         color="primary"
                         className={classes.submit}>
                         Submit
-                    </Button>
+                    </Styled.EnterRoundButton>
                     <Grid container>
                         <Grid item xs>
                             <Link to="/player-profile" variant="body2">
