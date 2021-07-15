@@ -1,69 +1,80 @@
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 import * as Styled from './styles';
 
-const StatCard = ({ statSummary }) => {
+const RoundDetails = ({ round }) => {
+    console.log('round', round);
+
     return (
         <Styled.Container>
-            <Styled.Header component="h2" variant="h5">Stat Summary</Styled.Header>
+            <Styled.Header component="h2" variant="h5">Round Details</Styled.Header>
             <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Stat</TableCell>
-                        <TableCell align="right">Value</TableCell>
-                    </TableRow>
-                </TableHead>
                 <TableBody>
                     <TableRow>
                         <TableCell>
-                            Fairways 
+                            Golf Club 
                         </TableCell>
                         <TableCell align="right">
-                            {statSummary.fairways} 
+                            {round.golf_club_name} 
                         </TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell>
-                            Greens In Regulation 
+                            Golf Course 
                         </TableCell>
                         <TableCell align="right">
-                            {statSummary.greens_in_regulation} 
+                            {round.golf_course_name} 
                         </TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell>
-                            Total Putts 
+                            Tee Box
                         </TableCell>
                         <TableCell align="right">
-                            {statSummary.putts} 
+                            {round.tee_box_color} 
                         </TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell>
-                            Up And Downs 
+                            Distance
                         </TableCell>
                         <TableCell align="right">
-                            {statSummary.up_and_downs} 
+                            {round.tee_box_distance} 
                         </TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell>
-                            Sand Saves
+                            Course Rating
                         </TableCell>
                         <TableCell align="right">
-                            {statSummary.sand_saves} 
+                            {round.tee_box_course_rating} 
                         </TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell>
-                            Penalties
+                            Par
                         </TableCell>
                         <TableCell align="right">
-                            {statSummary.penalties} 
+                            {round.tee_box_par} 
+                        </TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>
+                            Score
+                        </TableCell>
+                        <TableCell align="right">
+                            {round.gross_score} 
+                        </TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>
+                            Played On 
+                        </TableCell>
+                        <TableCell align="right">
+                            {round.played_on} 
                         </TableCell>
                     </TableRow>
                 </TableBody>
@@ -72,4 +83,4 @@ const StatCard = ({ statSummary }) => {
     );
 }
 
-export { StatCard };
+export { RoundDetails };

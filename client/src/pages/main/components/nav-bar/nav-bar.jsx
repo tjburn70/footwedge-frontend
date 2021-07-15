@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Drawer from '@material-ui/core/Drawer';
@@ -16,6 +15,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import GolfCourseIcon from '@material-ui/icons/GolfCourse';
 
+import * as Styled from './styles';
 import { LoginButton, LogoutButton, SignUpButton } from '../../components';
 import { MenuOptionsData } from './menu-options-data';
 import { useAuthState } from '../../../../hooks/use-auth-state';
@@ -80,7 +80,7 @@ const NavBar = () => {
   return (
     <div className={classes.root}>
         <AppBar position="static">
-            <Toolbar>
+            <Styled.Bar>
                 <IconButton
                     edge="start"
                     color="inherit"
@@ -97,7 +97,7 @@ const NavBar = () => {
                 <div className={classes.toolBarButtons}>
                     {renderButton()}
                 </div>
-            </Toolbar>
+            </Styled.Bar>
         </AppBar>
         <Drawer
             className={classes.drawer}

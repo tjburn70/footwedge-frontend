@@ -22,14 +22,11 @@ const HandicapCard = () => {
 
     return (
         <Styled.Container>
-            <Styled.Header component="h2" variant="h5" color="primary" gutterBottom>
-                Handicap:
-            </Styled.Header>
-            <Styled.Handicap component="p" variant="h5">
-                {handicapIndex}
+            <Styled.Handicap component="h2" variant="h5" gutterBottom>
+                Handicap: {handicapIndex}
             </Styled.Handicap>
             {calculatedOnDate ? (
-                <Styled.CalculatedOn>Calculated On: {formatDate(calculatedOnDate, 'yyyy-MM-dd')}</Styled.CalculatedOn>
+                <Styled.CalculatedOn>Last Calculated: {formatDate(calculatedOnDate, 'yyyy-MM-dd')}</Styled.CalculatedOn>
             ) : null}
             <Styled.EnterRoundButton
                 variant="contained"

@@ -7,10 +7,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import { RoundStat } from './round-stat';
-import { useTeeBox } from '../../../data/hooks/use-tee-boxes';
+
+import * as Styled from './styles';
+import { RoundStat } from '../round-stat';
+import { useTeeBox } from '../../../../data/hooks/use-tee-boxes';
 
 const useStyles = makeStyles({
     table: {
@@ -53,13 +54,13 @@ const Scorecard = ({ round, statsByHoleId }) => {
 
     return (
         <React.Fragment>
-        <Typography component="h2" variant="h5" color="primary" gutterBottom>
+        <Styled.Header component="h2" variant="h5" gutterBottom>
             Scorecard
-        </Typography>
+        </Styled.Header>
         <TableContainer component={Paper}>
         <Table className={classes.table} size="small" aria-label="a dense table">
             <TableHead>
-            <TableRow key="hole_number">
+            <Styled.Row key="hole_number">
                 <TableCell>Hole</TableCell>
                 {frontNine.map((hole) => (
                     <TableCell key={hole.hole_number} align="center">
@@ -74,7 +75,7 @@ const Scorecard = ({ round, statsByHoleId }) => {
                 ))}
                 <TableCell>IN</TableCell>
                 <TableCell>TOT</TableCell>
-            </TableRow>
+            </Styled.Row>
             <TableRow key="distance">
                 <TableCell>{teeBoxInfo}</TableCell>
                 {frontNine.map((hole) => (
@@ -109,7 +110,7 @@ const Scorecard = ({ round, statsByHoleId }) => {
                 <TableCell></TableCell>
                 <TableCell></TableCell>
             </TableRow>
-            <TableRow key="par">
+            <Styled.Row key="par">
                 <TableCell>Par</TableCell>
                 {frontNine.map((hole) => (
                     <TableCell key={hole.hole_number} align="center">
@@ -126,7 +127,7 @@ const Scorecard = ({ round, statsByHoleId }) => {
                 <TableCell>
                     {frontNinePar + backNinePar}
                 </TableCell>
-            </TableRow>
+            </Styled.Row>
             </TableHead>
             <TableBody>
             <TableRow>

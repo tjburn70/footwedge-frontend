@@ -3,12 +3,10 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import TableContainer from '@material-ui/core/TableContainer';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 
+import * as Styled from './styles';
 import { usePlayerRounds } from '../../../../data/hooks/use-player-rounds';
 import { PlayerRound } from '../player-round';
 
@@ -21,22 +19,22 @@ const PlayerRounds = () => {
 
     return (
         <React.Fragment>
-            <Typography component="h2" variant="h5" color="primary" gutterBottom>
+            <Styled.Header component="h2" variant="h5" gutterBottom>
                 Past Rounds
-            </Typography>
+            </Styled.Header>
             <TableContainer component={Paper}>
                 <Table size="small">
-                    <TableHead>
+                    <Styled.TableHeader>
                         <TableRow>
-                            <TableCell>Round Id</TableCell>
-                            <TableCell align="center">Player On</TableCell>
-                            <TableCell align="center">Score</TableCell>
-                            <TableCell align="center">Golf Course</TableCell>
-                            <TableCell align="center">Tee Box Distance</TableCell>
-                            <TableCell align="center">Course Rating</TableCell>
-                            <TableCell align="center">Towards Handicap</TableCell>
+                            <Styled.TableHeaderCell>Round Id</Styled.TableHeaderCell>
+                            <Styled.TableHeaderCell align="center">Played On</Styled.TableHeaderCell>
+                            <Styled.TableHeaderCell align="center">Score</Styled.TableHeaderCell>
+                            <Styled.TableHeaderCell align="center">Golf Course</Styled.TableHeaderCell>
+                            <Styled.TableHeaderCell align="center">Tee Box Distance</Styled.TableHeaderCell>
+                            <Styled.TableHeaderCell align="center">Course Rating</Styled.TableHeaderCell>
+                            <Styled.TableHeaderCell align="center">Towards Handicap</Styled.TableHeaderCell>
                         </TableRow>
-                    </TableHead>
+                    </Styled.TableHeader>
                     <TableBody>
                         {data.rounds.map((round) => (
                             <PlayerRound 

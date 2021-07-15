@@ -7,7 +7,6 @@ import Amplify from 'aws-amplify';
 import { AuthProvider } from './context/auth/auth-provider';
 import { appConfig } from './modules/config';
 import { MainPage } from './pages';
-import { AppRouter } from './routes/app-router';
 import { history } from './routes/history';
 
 Amplify.configure({ ...appConfig.auth, storage: window.localStorage });
@@ -20,7 +19,6 @@ ReactDOM.render(
       <AuthProvider>
         <Router history={history}>
           <MainPage />
-          <AppRouter />
         </Router>
       </AuthProvider>
     </QueryClientProvider>
